@@ -1,21 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { getProjectsList} from './actions'
+import FontAwesome from 'react-fontawesome';
+
 import './App.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.getProjectsList()
+  }
+
+  renderProjects() {
+    let projects = [];
+
+    this.props.projects.forEach((project, key) => {
+      projects.push(
+        <div key={`project_${key}`} className="project-thumbnail-container">
+          <img src={project.cover_image} />
+        </div>
+      );
+    });
+
+    return projects;
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div className="app">
+          <header className="site-header">
+            <div className="site-title-container">
+              <h1 className="site-title inline-block">Kelsey McAlpine</h1>
+            </div>
+            <div className="inline-block">
+              <nav className="site-nav-container">
+                <a href="#" className="site-nav-link">Projects</a>
+                <a href="#" className="site-nav-link">About Me</a>
+                <a href="#" className="site-nav-link">Contact</a>
+                <a href="#" className="site-nav-link">Resume</a>
+              </nav>
+            </div>
+          </header>
+          <main>
+            <section className="projects-container">
+              { this.props.projects.length > 0 && this.renderProjects() }
+            </section>
+          </main>
+          <footer className="footer-container">
+            <nav className="social-link-container">
+              <a href="#" className="social-link">LinkedIn</a>
+              <a href="#" className="social-link">Instagram</a>
+              <a href="#" className="social-link">Behance</a>
+              <a href="#" className="social-link">LinkedIn</a>
+            </nav>
+          </footer>
+        </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state, ownProps) {
+  return {
+    projects: state.projects
+  }
+}
+
+export default connect(mapStateToProps, { getProjectsList })(App);
