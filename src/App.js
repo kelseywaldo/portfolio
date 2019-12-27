@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getProjectsList} from './actions'
-import FontAwesome from 'react-fontawesome';
+import FontAwesome from '@fortawesome/react-fontawesome';
 
 import './App.css';
 
@@ -49,9 +49,9 @@ class App extends Component {
           <footer className="footer-container">
             <nav className="social-link-container">
               <a href="#" className="social-link">LinkedIn</a>
-              <a href="#" className="social-link">Instagram</a>
+              <a href="#" className="social-link">Github</a>
               <a href="#" className="social-link">Behance</a>
-              <a href="#" className="social-link">LinkedIn</a>
+              <a href="#" className="social-link">Email</a>
             </nav>
           </footer>
         </div>
